@@ -1,0 +1,59 @@
+<!-- include header footer -->
+<%- include('../header.ejs') %>
+    <br>
+    <br>
+    <br>
+    <h1>course View</h1>
+    <div class="container">
+        <table class="table table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Number</th>
+                <th>Address</th>
+                <th>Gender</th>
+                <th>qualification</th>
+                <th>college</th>
+                <th>semester</th>
+            </tr>
+
+            <tr>
+
+                <td>
+                    <%= d._id %>
+                </td>
+                <td>
+                    <%= d.name %>
+                </td>
+                <td>
+                    <%= d.email %>
+                </td>
+                <td>
+                    <%= d.number %>
+                </td>
+                <td>
+                    <%= d.address %>
+                </td>
+                <td>
+                    <%= d.gender %>
+                </td>
+                <td>
+                    <%= d.qualification %>
+                </td>
+                <td>
+                    <%= d.college %>
+                </td>
+                <td>
+                    <%= d.semester %>
+                </td>
+
+
+            </tr>
+
+
+
+
+        </table>
+    </div>
+    <%- include('../footer.ejs') %>

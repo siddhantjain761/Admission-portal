@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  </script>
+</head>
+
+<body>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#aa">Update Details</button>
+  <!-- Button trigger modal -->
+  <div class="modal fade" id="aa">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header" style="background: #11f41130">
+          <h5 class="modal-title" id="exampleModalLabel" style="color: #008A45;font-weight: 500;font-size: 14px"> Let's
+            learn, share & inspire each other with our passion for computer engineering. Sign up now 🤘</h5>
+          <button type="button" class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <h2>Edit Details</h2>
+              </div>
+            </div>
+          </div>
+
+          <div class="container">
+
+            <div class="row">
+              <div class="col-md-12">
+                <form action="/courseupdate/<%= d._id %>" method="post">
+                  <div class="form-group">
+                    <lable>Student name</lable>
+                    <input  type="text" name="name" value="<%= d.name %>"  placeholder="Enter name" class="form-control">
+                  </div><br>
+                  <div class="form-group">
+                    <lable>Email</lable>
+                    <input value="<%= d.email %>" type="email" name="email" placeholder="Enter email" class="form-control">
+                    <p style="color:grey;font-size: 12px ">We"ll never share your email with anyone else.</p>
+                  </div>
+                  <div class="form-group">
+                    <lable>Mobile Number</lable>
+                    <input value="<%= d.number %>" type="number" name="number" placeholder="Enter mobile number" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <lable>Address</lable>
+                    <textarea name="address" row="50" cols="50" class="form-control"><%= d.address %></textarea>
+                  </div>
+                  <div class="form-group">
+                    <label>Gender</label><br>
+                    <input type="radio" value="male" <%= d.gender=='male'?'checked':'' %> name="gender">Male
+                    <input type="radio" value="female" <%= d.gender=='female'?'checked':'' %> name="gender">Female
+                  </div>
+                  <div class="form-group">
+                    <label>College</label><br>
+                    <select name="college" class="form-control">
+                      <option value="0">Select</option>
+                      <option value="MITS" <%= d.college =='MITS'?'selected':'' %>>MITS</option>
+                      <OPTION value="SGS-ITS" <%= d.college =='SGS-ITS'?'selected':'' %>>SGS-ITS</OPTION>
+                      <option value="MANIT" <%= d.college =='MANIT'?'selected':'' %>>MANIT</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Qualification</label><br>
+                    <select name="qualification" class="form-control">
+                      <option>Select</option>
+                      <option value="B.Tech" <%= d.qualification =='B.Tech'?'selected':'' %>>B.Tech</option>
+                      <option value="B.Com" <%= d.qualification =='B.Com'?'selected':'' %>>B.Com</option>
+                      <OPTION value="B.Arc" <%= d.qualification =='B.Arc'?'selected':'' %>>B.Arc</OPTION>
+                      <option value="Other" <%= d.qualification =='B.Other'?'selected':'' %>>Other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>Semester</label><br>
+                    <select name="semester" class="form-control">
+                      <option>Select</option>
+                      <option value="1" <%= d.semester =='1'?'selected':'' %>>1st</option>
+                      <option value="4" <%= d.semester =='4'?'selected':'' %>>4th</option>
+                      <OPTION value="6" <%= d.semester =='6'?'selected':'' %>>6th</OPTION>
+                      <option value="other" <%= d.semester =='other'?'selected':'' %>>other</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label>internship course</label><br>
+                    <select name="course" class="form-control">
+                      <option>select</option>
+                      <option value="PHP" <%= d.course =='PHP'?'selected':'' %>>PHP</option>
+                      <option value="Laravel" <%= d.course =='Laravel'?'selected':'' %>>Laravel</option>
+                      <option value="Angular" <%= d.course =='Angular'?'selected':'' %>>Angular</option>
+                      <option value="Django" <%= d.course =='Django'?'selected':'' %>>Django</option>
+                      <option value="Python" <%= d.course =='Python'?'selected':'' %>>Python</option>
+                    </select>
+
+                  </div>
+                  <button type="update" name="" class="btn bg-info text-white">Update</button>
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

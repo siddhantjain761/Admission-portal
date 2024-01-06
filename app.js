@@ -6,6 +6,7 @@ const port = 3000
 var session = require('express-session')
 var flash = require('connect-flash')
 
+
 //to show the messages
 app.use(session({
     secret: 'secret',
@@ -14,6 +15,12 @@ app.use(session({
     saveUninitialized: false,
 }));
 app.use(flash());
+
+
+//Cookie :: to get the token
+
+const cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 //datatarget
 app.use(express.urlencoded({ extended:true}))

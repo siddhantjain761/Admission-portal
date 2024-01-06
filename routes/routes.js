@@ -3,6 +3,7 @@ const UserController = require('../controllers/UserController')
 const FrontendController = require('../controllers/FrontendController')
 const CourseController = require('../controllers/CourseController')
 const route = express.Router()
+const checkuserauth = require('../middleware/auth')
 
 //routing
 // route.get('/',UserController.home)//by defalut for 3000 port
@@ -20,12 +21,12 @@ route.post('/verify_login',FrontendController.verify_login)
 //logout
 route.get('/logout',FrontendController.logout)
 //course controller routing
-route.post('/courseinsert',CourseController.courseInsert)
-route.get('/course/display',CourseController.courseDisplay)
-route.get('/courseview/:id',CourseController.courseView)
-route.get('/courseedit/:id',CourseController.courseEdit)
-route.post('/courseupdate/:id',CourseController.courseUpdate)
-route.get('/coursedelete/:id',CourseController.courseDelete)
+route.post('/courseinsert',checkuserauth,CourseController.courseInsert)
+route.get('/course/display',checkuserauth,CourseController.courseDisplay)
+route.get('/courseview/:id',checkuserauth,CourseController.courseView)
+route.get('/courseedit/:id',checkuserauth,CourseController.courseEdit)
+route.post('/courseupdate/:id',checkuserauth,CourseController.courseUpdate)
+route.get('/coursedelete/:id',checkuserauth,CourseController.courseDelete)
 
 
 module.exports = route  //so that we can require this file in app.js

@@ -87,6 +87,12 @@ class FrontendController {
                 if(user!=null){
                     const ismatch = await bcrypt.compare(password,user.password)
                     if(ismatch){
+                        //generating token
+                        //generating token through ID and 2nd part is secrete key:can be any anomous string
+                        const token = jwt.sign({ ID: user._id} , 'siddhant@9872135674')
+                        //console.log(token)
+                        //check token on : https://jwt.io/
+                        res.cookie('token',token)
                         res.redirect('/course/display')
                     }else{
                         req.flash('error','Incorrect password')
@@ -112,6 +118,7 @@ class FrontendController {
     }
     static logout = async (req, res) => {
         try {
+            res.clearCookie('token') //clearing token
             res.redirect('/')
         }
         catch (error) {

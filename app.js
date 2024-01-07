@@ -2,9 +2,26 @@ const express = require('express')
 //console.log(express)
 const app= express()
 const port = 3000
-
+const dotenv = require('dotenv')
+dotenv.config({path:'./.env'})   //for image 
+const route = require('./routes/routes')  //router load
+const connectdb=require('./db/dbcon')
 var session = require('express-session')
 var flash = require('connect-flash')
+
+
+//server creat
+app.listen(process.env.PORT,()=>{
+    console.log( ` server is running: ${process.env.PORT}`)
+})
+
+
+//routing load
+// server 1t comes to app.js=>routes.js=>usercontroller=>views=>render data from specific page
+app.use('/',route)
+
+//connection to database
+connectdb()
 
 
 //to show the messages
@@ -24,18 +41,10 @@ app.use(cookieParser())
 
 //datatarget
 app.use(express.urlencoded({ extended:true}))
+ 
 
-//router load
-const route = require('./routes/routes')
-
-const connectdb=require('./db/dbcon')
-//connection to database
-connectdb()
-
-
-//routing load
-// server 1t comes to app.js=>routes.js=>usercontroller=>views=>render data from specific page
-app.use('/',route) 
+ 
+ 
 
 //ejs set , css engine is ejs 
 app.set('view engine','ejs')
@@ -45,7 +54,4 @@ app.use(express.static('public'))
 
 
 
-//server creat
-app.listen(port,()=>{
-    console.log( ` server is running: ${port}`)
-})
+ 

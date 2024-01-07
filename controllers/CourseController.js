@@ -26,6 +26,7 @@ class CourseController{
         try{
             const data = await  CourseModel.find()
             //console.log(data)
+            res.send(data)
             res.render('course/display',{d:data,message:req.flash('success'),})  //sending data to course/display file
         }catch(error){
             console.log(error)

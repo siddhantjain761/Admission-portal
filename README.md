@@ -9,5 +9,15 @@ For security and middleware :
 
   To get the token in middleware/auth.js install package:
   npm i cookie-parser
+  
+  In this hands-on, we saw how we can perform a session-based authentication in Express.js. We started by creating a new folder on the local machine. Initializing 
+  different commands, we created a package.json file for package installations
+
+  Post that, we created a middleware function that would check if the user is logged in or not (if the session still exists or is destroyed). Then, adding a middleware 
+  in the route for loading the welcome page, we started the server and checked if the signup process and session creation process were working as expected. Then we 
+  added the routes and the required checks for login and logout.
+
+  Finally, we tested out the entire authentication process by signing up, logging in, logging out, entering invalid credentials, etc.
+
 
 

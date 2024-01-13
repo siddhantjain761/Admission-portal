@@ -90,7 +90,7 @@ class FrontendController {
                         //generating token
                         //generating token through ID and 2nd part is secrete key:can be any anomous string
                         const token = jwt.sign({ ID: user._id} , 'siddhant@9872135674')
-                        //console.log(token)
+                        console.log(token)
                         //check token on : https://jwt.io/
                         res.cookie('token',token)
                         res.redirect('/course/display')

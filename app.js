@@ -16,13 +16,6 @@ app.listen(process.env.PORT,()=>{
 })
 
 
-//routing load
-// server 1t comes to app.js=>routes.js=>usercontroller=>views=>render data from specific page
-app.use('/',route)
-
-//connection to database
-connectdb()
-
 
 //to show the messages
 app.use(session({
@@ -39,8 +32,24 @@ app.use(flash());
 const cookieParser = require('cookie-parser')
 app.use(cookieParser())
 
+
+
 //datatarget
 app.use(express.urlencoded({ extended:true}))
+
+ 
+//connection to database
+connectdb()
+
+//routing load
+// server 1t comes to app.js=>routes.js=>usercontroller=>views=>render data from specific page
+app.use('/',route)
+
+ 
+
+
+ 
+ 
  
 
  

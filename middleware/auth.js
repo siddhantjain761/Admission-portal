@@ -4,7 +4,7 @@ const usermodal = require('../models/user')
 const checkuserauth = async(req,res,next) => {
     //console.log('hello auth')
     const {token} = req.cookies
-    //console.log(token) //get token from cookie
+    console.log(token) //get token from cookie
     if(!token){
         req.flash('error','Unautherized user')
         res.redirect('/')

@@ -1,15 +1,24 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const validator = require("validator");
 
 //create schema
 
 const UserSchema = new mongoose.Schema({
     name:{
         type:String,
-        Required:true
+        Required:true,
+        trim: true ,
+        maxLength : [15 , "max of 15 character are allowed"]       
     },
     email:{
         type:String,
-        Required:true
+        Required:true,
+        validate: {
+            validator: function(value) {
+              return validator.isEmail(value);
+              },
+            message: "Invalid email address",
+            }
     },
     password:{
         type:String,

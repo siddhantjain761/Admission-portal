@@ -1,7 +1,9 @@
 const express = require('express') 
 //console.log(express)
-const app= express()
+const  app= express()
 const port = 3000
+
+
 const dotenv = require('dotenv')
 dotenv.config({path:'./.env'})   //for image 
 const route = require('./routes/routes')  //router load

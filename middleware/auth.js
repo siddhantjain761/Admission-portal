@@ -3,11 +3,13 @@ const usermodal = require('../models/user')
 
 const checkuserauth = async(req,res,next) => {
     //console.log('hello auth')
-    const {token} = req.cookies
+    try{
+        const {token} = req.cookies
     console.log(token) //get token from cookie
     if(!token){
         req.flash('error','Unautherized user')
-        res.redirect('/')
+        throw new Error("Invalid Token");
+        //res.redirect('/')
     }else{
         //verify token
         const verify = jwt.verify(token,'siddhant@9872135674')
@@ -17,7 +19,10 @@ const checkuserauth = async(req,res,next) => {
         next() //re-render to the router where checkauth is used
 
     }
-
+    }catch(err)      {
+        res.status(500).json({ error: err.message });
+    }
+     
 }
 
 module.exports = checkuserauth

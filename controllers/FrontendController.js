@@ -29,14 +29,15 @@ class FrontendController {
     }
     static userinsert = async(req,res) => {
         
-            //console.log(req.body) 
+            console.log("body ::" ,req.body) 
             const {name,email,password,cpassword} = req.body
             //1st email is from the modalschema and the other email that is there in regester from 
             const user = await UserModel.findOne({email:email})    //validation that no duplicate email is presented
             console.log(user)  
             if(user){
                 req.flash('error','Email already exist')
-                res.redirect('/register')
+                //res.redirect('/register')
+               res.status(200).send("Email already exist");
             }else{
                 if(name && email && password && cpassword){ //valdation hat all fild are required
                     
@@ -48,22 +49,27 @@ class FrontendController {
                                  email:email,
                                  password:hashpassword
                          })
-                         await result.save()
+                         await result.save();
+                          res.status(200).send("Regestartion Successfull");
                           req.flash('success','Registration Successfull , Pleae login here')
-                          res.redirect('/')
+                         // res.redirect('/')
                         }
                         catch(error){
+                            res.status(500).json({erroe : error.message});
                             console.log(error)
                         }
                        
                     }else{
                         req.flash('error','Password and confirm password must be same')
-                           res.redirect('/register')
+                        //res.redirect('/register')
+                        res.status(500).json({error : "Password and confirm password must be same"});
                     }    
 
                 }else{
                     req.flash('error','All fields are required')
-                    res.redirect('/register')
+                    //res.redirect('/register')
+                    
+                    res.status(500).json({error : "All fields are required"});
                 }  
             }
             
@@ -93,7 +99,9 @@ class FrontendController {
                         console.log(token)
                         //check token on : https://jwt.io/
                         res.cookie('token',token)
+                       // res.status(200).send(user);
                         res.redirect('/course/display')
+                         
                     }else{
                         req.flash('error','Incorrect password')
                     res.redirect('/') 

@@ -14,7 +14,7 @@ const checkuserauth = require('../middleware/auth')
 //Frontend controller routing
 route.get('/',FrontendController.login)
 route.get('/register',FrontendController.register)
-route.get('/dashboard',FrontendController.dashboard)
+route.get('/dashboard',checkuserauth,FrontendController.dashboard)
 route.post('/userinsert',FrontendController.userinsert)    
 route.post('/verify_login',FrontendController.verify_login)
 

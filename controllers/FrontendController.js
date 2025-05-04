@@ -1,7 +1,7 @@
 const UserModel = require("../models/user")
 const bcrypt = require('bcrypt'); //to make the password encrypted , install "npm i bcrypt"
 const jwt = require('jsonwebtoken');
-
+const ValidateData = require("../utils/vaidation")
 class FrontendController {
     static login = async (req, res) => {
         try {
@@ -55,7 +55,7 @@ class FrontendController {
                          // res.redirect('/')
                         }
                         catch(error){
-                            res.status(500).json({erroe : error.message});
+                            res.status(500).json({error : error.message});
                             console.log(error)
                         }
                        
@@ -85,43 +85,49 @@ class FrontendController {
     }
     static verify_login = async (req,res) => {
         try{
-            //console.log(req.body)
-            const {email,password} = req.body
-            if(email,password){
-                const user = await UserModel.findOne({email:email})
-                //console.log(user)
-                if(user!=null){
-                    const ismatch = await bcrypt.compare(password,user.password)
-                    if(ismatch){
-                        //generating token
-                        //generating token through ID and 2nd part is secrete key:can be any anomous string
-                        const token = jwt.sign({ ID: user._id} , 'siddhant@9872135674')
-                        console.log(token)
-                        //check token on : https://jwt.io/
-                        res.cookie('token',token)
-                       // res.status(200).send(user);
-                        res.redirect('/course/display')
+            await ValidateData.ValidateSingUpdata(req);
+            //console.log("hello" ,req.body)
+            // const {email,password} = req.body;
+            // if(!email){
+            //     throw new Error("enter an email id");      
+            // }
+            
+            // if(email && password){
+            //     const user = await UserModel.findOne({email:email})
+            //     if(user!=null){
+            //         const ismatch = await bcrypt.compare(password,user.password)
+            //         if(ismatch){
+            //             //generating token
+            //             //generating token through ID and 2nd part is secrete key:can be any anomous string
+            //             const token = jwt.sign({ ID: user._id} , 'siddhant@9872135674')
+            //             console.log(token)
+            //             //check token on : https://jwt.io/
+            //             res.cookie('token',token)
+            //             res.status(200).send(user);
+            //             //res.redirect('/course/display')
                          
-                    }else{
-                        req.flash('error','Incorrect password')
-                    res.redirect('/') 
+            //         }else{
+            //             req.flash('error','Incorrect password')
+            //             //res.redirect('/') 
 
-                    }
+            //         }
 
-                }else{
-                    req.flash('error','Not a regestired user')
-                    res.redirect('/') 
+            //     }else{
+            //         req.flash('error','Not a regestired user')
+            //        // res.redirect('/') 
+            //        res.status(200).send({"error" : "Not a register user"})
 
-                }
+            //     }
 
-            }else{
-                req.flash('error','Incorrect credientials')
-                res.redirect('/')
-            }
+            // }else{
+            //     req.flash('error','Incorrect credientials')
+            //     //res.redirect('/')
+            //     res.status(200).send({"error" : "Incorrect credientials" })
+            // }
 
-        }catch(error){
-            console.log(error)
-
+        }catch(err){
+         //console.log(err);  
+            res.status(500).send({"error" : err.message});     
         }
     }
     static logout = async (req, res) => {

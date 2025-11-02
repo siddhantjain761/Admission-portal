@@ -4,6 +4,11 @@ This technology stack provides a scalable, efficient, and flexible solution for 
 The specific versions used are Node.js version 18.16.0 and Embedded JavaScript Templates (EJS) for server-side rendering. 
 
 
+npm install express
+
+Simple Usage (Enable All CORS Requests)
+npm install cors
+
 I have used Flash Messages in Node.js using the Connect-flash Package to show user friendly message 
      Flash is a session-specific area used to store messages. Messages are written to the flash and then cleared after the user sees them. Flash is commonly used in 
      conjunction with redirects to ensure that the message is available on the next page to be rendered.

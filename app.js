@@ -1,7 +1,13 @@
 const express = require('express') 
 //console.log(express)
 const  app= express()
-const port = 3000
+var cors = require('cors')
+var corsOptions = {
+  "origin": "*",
+  "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}
 
 
 const dotenv = require('dotenv')
@@ -17,6 +23,8 @@ app.listen(process.env.PORT,()=>{
     console.log( ` server is running: ${process.env.PORT}`)
 })
 
+
+app.use(cors(corsOptions));
 
 
 //to show the messages

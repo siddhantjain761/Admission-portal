@@ -4,6 +4,7 @@ const FrontendController = require('../controllers/FrontendController')
 const CourseController = require('../controllers/CourseController')
 const route = express.Router()
 const checkuserauth = require('../middleware/auth')
+const authLimiter = require('../middleware/rate_limiter')
 
 //routing
 // route.get('/',UserController.home)//by defalut for 3000 port
@@ -15,8 +16,7 @@ const checkuserauth = require('../middleware/auth')
 route.get('/', FrontendController.login)
 route.get('/register', FrontendController.register)
 route.get('/dashboard', checkuserauth, FrontendController.dashboard)
-route.post('/userinsert', FrontendController.userinsert)
-route.post('/verify_login', FrontendController.verify_login)
+route.post('/verify_login', authLimiter, FrontendController.verify_login)
 route.get('/refresh_token', FrontendController.refreshToken)
 
 //logout

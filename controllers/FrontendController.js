@@ -114,7 +114,8 @@ class FrontendController {
 
                     } else {
                         req.flash('error', 'Incorrect password')
-                        res.redirect('/')
+                        throw new Error("Incorrect credientials");
+                        // res.redirect('/')
                     }
                 } else {
                     req.flash('error', 'Not a regestired user')
@@ -124,18 +125,19 @@ class FrontendController {
             } else {
                 req.flash('error', 'Incorrect credientials')
                 //res.redirect('/')
-                res.status(200).send({ "error": "Incorrect credientials" })
+                res.status(401).send({ "error": "Incorrect credientials" })
             }
 
         } catch (err) {
             //console.log(err);  
-            res.status(500).send({ "error": err.message });
+            res.status(401).send({ "error": err.message });
+            // res.redirect('/');
         }
     }
 
     static refreshToken = async (req, res) => {
         try {
-            console.log("//////////hello",req.cookies.refreshtoken);
+            console.log("//////////hello", req.cookies.refreshtoken);
             const refreshtoken = req.cookies.refreshtoken
             if (refreshtoken) {
                 const verify = await ValidateData.verifyJWT(refreshtoken);

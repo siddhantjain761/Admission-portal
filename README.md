@@ -29,6 +29,10 @@ For security and middleware :
 
   Finally, we tested out the entire authentication process by signing up, logging in, logging out, entering invalid credentials, etc.
 
+  #implementeing rate limiting fature
+
+  npm install express-rate-limit
+
 
 
 
